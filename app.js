@@ -1,20 +1,3 @@
-// const express = require('express');
-// const app = express();
-// app.use(express.json());
-
-// const PORT = process.env.PORT || 3000;
-
-// app.listen(PORT, () => {
-//     console.log("Server Listening on PORT:", port);
-// });
-
-// app.get("/status", (request, response) => {
-//     const status = {
-//        "Status": "Running"
-//     };
-//     response.send(status);
-// });
-
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -48,6 +31,24 @@ app.get('/feitje', (req, res) => {
 
     res.send(feitje);
 })
+
+app.get('/releasedate', (req, res) => {
+    const game = req.query.game.toLowerCase();
+    const games = {
+        "minecraft": 2009,
+        "roblox": 2007,
+        "elden-ring": 2023,
+        "god-of-war": 2018,
+        "little-kitty-big-city": 2024,
+        "ark": 2015
+    };
+
+    if(games.hasOwnProperty(game)) {
+        res.send({"year": games[game]});
+    } else {
+        res.send({"year": "Game does not exist"});
+    }
+});
 
 app.get("/status", (req, res) => {
     const status = {
