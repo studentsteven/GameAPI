@@ -34,19 +34,23 @@ app.get('/feitje', (req, res) => {
 
 app.get('/releasedate', (req, res) => {
     const game = req.query.game.toLowerCase();
-    const games = {
-        "minecraft": 2009,
-        "roblox": 2007,
-        "elden-ring": 2023,
-        "god-of-war": 2018,
-        "little-kitty-big-city": 2024,
-        "ark": 2015
-    };
-
-    if(games.hasOwnProperty(game)) {
-        res.send({"year": games[game]});
+    if(game != "") {
+        const games = {
+            "minecraft": 2009,
+            "roblox": 2007,
+            "elden-ring": 2023,
+            "god-of-war": 2018,
+            "little-kitty-big-city": 2024,
+            "ark": 2015
+        };
+    
+        if(games.hasOwnProperty(game)) {
+            res.send({"year": games[game]});
+        } else {
+            res.send({"year": "Game does not exist"});
+        }
     } else {
-        res.send({"year": "Game does not exist"});
+        res.send("Error: er is geen game meegegeven");
     }
 });
 
